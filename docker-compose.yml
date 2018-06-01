@@ -1,0 +1,16 @@
+version: '3'
+services:
+    server:
+        build:
+            context: .
+            dockerfile: Dockerfile-server
+        ports:
+            - 8020:8020
+            - 8021:8021
+    client:
+        build:
+            context: .
+            dockerfile: Dockerfile-client
+        entrypoint: /bin/sh
+        tty: true
+        stdin_open: true
