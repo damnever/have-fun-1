@@ -7,7 +7,7 @@ import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--addr', type=str, default='server:8020', help='the server port')  # noqa
-parser.add_argument('--rbufsz', type=int, default=0, help='the server port')  # noqa
+parser.add_argument('--rbufsz', type=int, default=0, help='the read buffer size')  # noqa
 args = parser.parse_args()
 
 

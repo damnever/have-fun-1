@@ -2,13 +2,15 @@
 
 The current result(use docker) is not what I expected, maybe some thing wrong with network emulation, or docker ..
 
-Also, pprof, perf_event and other profile tools doesn't give a shit..
-
 
 ### In Real World (multi-datacenter)
 
+Is there some thing wrong with Golang(IO model/runtime)?
+
+pprof, perf_event and other profile tools doesn't give a shit..
+
 ```
-$ python client.py --addr 10.203.216.22:8020
+$ python client.py --addr 10.xx.xx.xx:8020
 0.621856927872 s
 0.215888977051 s
 0.106964111328 s
@@ -20,7 +22,7 @@ $ python client.py --addr 10.203.216.22:8020
 0.180653095245 s
 0.180568933487 s
 [AVG] 0.204426884651 s
-$ ./client -addr 10.203.216.22:8020
+$ ./client -addr 10.xx.xx.xx:8020
 228.383141ms
 96.566201ms
 107.525007ms
@@ -32,7 +34,7 @@ $ ./client -addr 10.203.216.22:8020
 125.931539ms
 125.36633ms
 [AVG] 131.190783ms
-$ ./client -addr 10.203.216.22:8020 -rbufsz 4194304
+$ ./client -addr 10.xx.xx.xx:8020 -rbufsz 4194304
 896.057939ms
 843.960815ms
 843.428539ms
@@ -44,7 +46,7 @@ $ ./client -addr 10.203.216.22:8020 -rbufsz 4194304
 843.394633ms
 843.344434ms
 [AVG] 848.914805ms
-$ python client.py --addr 10.203.216.22:8020 --rbufsz 4194304
+$ python client.py --addr 10.xx.xx.xx:8020 --rbufsz 4194304
 0.227913141251 s
 0.0962738990784 s
 0.102230072021 s
@@ -70,20 +72,12 @@ docker-compose ps
 
 # download https://github.com/alexei-led/pumba/releases
 # delay 25ms
-pumba netem --duration 1h delay --time 25 --jitter 0 test-1_server_1
+pumba netem --duration 1h delay --time 25 --jitter 0 have-fun-1_server_1
 
 # show results
-# normal
-sh run_client.sh go server:8020 0  # go <-> go
-sh run_client.sh go server:8021 0  # go <-> py
-sh run_client.sh py server:8020 0  # py <-> go
-sh run_client.sh py server:8021 0  # py <-> py
-# set SO_RCVBUF
-sh run_client.sh go server:8020 4194304  # go <-> go
-sh run_client.sh go server:8021 4194304  # go <-> py
-sh run_client.sh py server:8020 4194304  # py <-> go
-sh run_client.sh py server:8021 4194304  # py <-> py
-
+docker attach have-fun-1_client_1
+ping server
+sh run_client.sh
 
 # stop containers
 docker-compose stop
