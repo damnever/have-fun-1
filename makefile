@@ -1,5 +1,6 @@
 build-linux:
 	env GOOS=linux GOARCH=amd64 go build -o client client.go
+	env GOOS=linux GOARCH=amd64 go build -o clientv2 clientv2.go
 	env GOOS=linux GOARCH=amd64 go build -o server server.go
 
 

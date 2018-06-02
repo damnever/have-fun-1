@@ -10,7 +10,7 @@ import (
 )
 
 var (
-	addr   = flag.String("addr", "server:8021", "the server port")
+	addr   = flag.String("addr", "server:8021", "the server address")
 	rbufsz = flag.Int("rbufsz", 0, "the tcp read buffer size")
 )
 

@@ -2,6 +2,8 @@
 
 The current result(use docker) is not what I expected, maybe some thing wrong with network emulation, or docker ..
 
+**NOTE**: problem solved.. see https://github.com/golang/go/issues/25701 for details.
+
 
 ### In Real World (multi-datacenter)
 
