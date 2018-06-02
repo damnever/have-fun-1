@@ -5,4 +5,4 @@ build-linux:
 
 clean:
 	rm -f client server
-	docker rmi $(docker images -f "dangling=true" -q)
+	docker rmi $(shell docker images -f "dangling=true" -q)
